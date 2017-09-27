@@ -1,0 +1,289 @@
+\documentclass[12pt, fleqn]{article}
+
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[brazilian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{graphicx}
+\usepackage[justification=centering]{caption}
+\usepackage{mathtools}
+\usepackage{placeins}
+\usepackage[tight,footnotesize]{subfig}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{pgfgantt}
+\usepackage[english, status=draft]{fixme}
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{tikz}
+
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;} 
+
+% Colors on or off: Pick ONE
+\newcommand{\ifColorText}[2]{\textcolor{#1}{#2}}  % Colors ON
+%\renewcommand{\ifColorText}[2]{{#2}}                   % Colors OFF
+
+% To turn comments OFF simply comment out  the \Commentstrue line
+\newif\ifComments
+\Commentstrue
+
+\ifComments
+\newcommand{\chek}[1]{\noindent\textcolor{red}{Check: {#1}}}
+\newcommand{\short}[1]{\noindent\textcolor{blue}{ {#1}}}
+\else
+\newcommand{\chek}[1]{}
+\newcommand{\short}[1]{}
+\fi
+
+% Additional new commands
+\newcommand{\etal}{{\em et al. }}
+\newcommand{\cL}{{\cal L}}
+\newcommand{\map}{\texttt{map} }
+\newcommand{\unmap}{\texttt{unmap} }
+\newcommand{\rb}{\texttt{readBuffer} }
+\newcommand{\rsec}[1]{Section~\ref{sec:#1}}
+\newcommand{\rsecs}[2]{Sections~\ref{sec:#1} --~\ref{sec:#2}}
+\newcommand{\rtab}[1]{Table~\ref{tab:#1}}
+\newcommand{\rfig}[1]{Figure~\ref{fig:#1}}
+\newcommand{\rfigs}[2]{Figures~\ref{fig:#1} --~\ref{fig:#2}}
+\newcommand{\rlst}[1]{Listing~\ref{lst:#1}}
+\newcommand{\req}[1]{Equation~\ref{eq:#1}}
+\newcommand{\reqs}[2]{Equations~\ref{eq:#1} --~\ref{eq:#2}}
+\newcommand{\ttt}[1]{{\texttt{#1}}}
+\newcommand{\tit}[1]{{\textit{#1}}}
+\newcommand{\mat}[1]{${#1}$}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\renewcommand{\lstlistingname}{Code}% Listing -> Algorithm
+
+\lstset{ %
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	frame=single,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	language=Octave,                 % the language of the code
+	morekeywords={*,...},           % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=2,	                   % sets default tabsize to 2 spaces
+	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+% Default fixed font does not support bold face
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+% Custom colors
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+		language=Python,
+		basicstyle=\ttm,
+		otherkeywords={self},             % Add keywords here
+		keywordstyle=\ttb\color{deepblue},
+		emph={MyClass,__init__},          % Custom highlighting
+		emphstyle=\ttb\color{deepred},    % Custom highlighting style
+		stringstyle=\color{deepgreen},
+		frame=tb,                         % Any extra options here
+		showstringspaces=false            % 
+}}
+
+
+% Python environment
+\lstnewenvironment{python}[1][]
+{
+	\pythonstyle
+	\lstset{#1}
+}
+{}
+
+% Python for external files
+\newcommand\pythonexternal[2][]{{
+	\pythonstyle
+	\lstinputlisting[#1]{#2}}}
+
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+\begin{document}
+\title{A Comparative Performance Evaluation of \\ OpenCV and libccv \\\  \\
+{\large Additional Work Plan (Contract 4716.8)\\}}
+\author{Prof. Guido Araujo\\ \ \\ \ \\ \  \\}
+\date{\vspace{-9ex}}
+\maketitle
+
+\section{Introduction} 
+\label{sec:Introduction}
+
+This workplan has for goal to define the scope and activities of the tasks  needed  to characterize the best image processing  library for  Samsung mobile devices.  As such, it will do a thorough profiling of the OpenCV and libccv libraries when executing  on Samsung devices, using multicore and GPU architnectures. It will also make a preliminary evaluation of the potential of using the  AClang compiler to optimize such libraries for GPUs.
+
+This workplan is divided  as follows. \rsec{libs} does a qualitative assessment of the the OpenCV and libccv libraries to better understand the following library features: (a)  code quality; (b) availability of parallelization and optimization techniques; and (c) maintainability and support. In \rsec{libfight} we do a very preliminary comparative analysis of the performance of three well-known filters from these libraries, which reveal that there is plenty of scope for performance improvement in libccv. As a matter of fact, for these particular filters, OpenCV on ARM-NEON considerably outperforms libccv. In \rsec{proposal} we shortly describe the goals of this work plan and provide an execution schedule. Finally, in  \rsec{schedule} we describe the activities required for this work plan.
+
+\section{Analysis of OpenCV and libccv}
+\label{sec:libs}
+
+This section shows a short, preliminary, comparative study between the Open Source Computer Vision Library (OpenCV)\cite{opencv} and the Computer Vision Library (libccv)\cite{ccv}. 
+
+\subsection{OpenCV}
+OpenCV is an open source computer vision and machine learning software library that includes more than 2,500 optimized algorithms \cite{opencv}. The OpenCV's community today counts with more than 47,000 people that contribute directly with bug reports and improvements.
+
+There are several advantages of using OpenCV, as follows:
+\begin{itemize}
+	\item OpenCV has support for vector extensions (AVX, SSE and NEON). It implements different vector extensions through a \textit{template} called Hardware Acceleration Layer (HAL). The idea is that one can use a single SIMD  code template that is compiled to either SSE or NEON instructions, depending on the target platform. In the case of Samsung mobile devices, the hardware can take advantage of  routines that have NEON implemented;
+	\item OpenCV makes use of some BLAS routines (OpenBLAS, MLK, ATLAS);
+	\item OpenCV has an active community. With the reports and contributions done by the OpenCV community in its version 3.0, about 200 bugs 	were fixed; and, besides that, some improvements were done related to the enhancement of 40 routines in the  Android environment;
+	\item There are several Android applications using OpenCV, e.g, Facebook, Instagram, Snapchat, etc;
+	\item OpenCV has implementations of CUDA and OpenCL for several routines. Besides that, OpenCV also provides support for TBB and 
+	OpenMP.
+\end{itemize}
+
+On the other hand, we also detected some drawbacks when using  OpenCV OpenCL routines on Samsung mobile devices. Its  OpenCL implementations were built with improvements targeting only Intel and AMD. Hence, the execution on Samsung mobile GPUs may produce slowdowns since it is not optimized for this kind of environment.
+
+\subsection{libccv}
+As discussed in~\cite{ccv},  libccv has for goal to provide  a simpler and organized image processing code that can be easily deployed. According to its author (Liu Liu),  libccv implements a handful state-of-art algorithms,  developed mainly to execute on mobile environments (Android \& iPhone-iOS).
+
+The advantages claimed by libccv are much less beneficial when compared to OpenCV. Since it has just a few routines implemented with vector extension, libccv makes few uses of BLAS routines.  Besides that, it makes almost no  use of parallelism even within routines that  clearly expose good data parallelism potential.
+
+Moreover, libccv has some additional disadvantages that make its usage not as attractive as OpenCV; they are:
+
+\begin{itemize}
+	\item libccv has a limited documentation;
+	\item As far as we know from public domain, there is only one person supporting libccv (its creator -  Liu Liu);
+	\item It implements fewer routines  when compared to OpenCV;
+	\item Maybe it was faster than OpenCV sometime between 2010 -- 2014;
+	\item It does not have any OpenCL routine;
+	\item The code is very complex, with several macros, and is hard to maintain;
+	\item The last release was done in 2014; and
+	\item There is almost no developer community - consequently - it does not have support.
+\end{itemize}
+
+As a preliminary conclusion, we have observed that  libccv is not prepared to exploit the maximum computational power of Samsung mobile devices. Its  code does  not  use almost any parallelization construct,  and thus it does not utilize the parallelization features of the ARM-NEON  and  GPU architectures available in Samsung devices.
+
+\section{OpenCV vs libccv}
+\label{sec:libfight}
+In a preliminary study, we  have performed some experiments to compare the execution time between OpenCV and libccv. Table \ref{table:time} shows the absolute execution time taken from the execution of three filters: Blur, Canny and Sobel. Each filter was re-executed 5 times, with the same 4K picture, in order to compute its  average execution time.
+
+The experiments were performed in a Samsung mobile S7 edge with an Exynos 8890 Octa-core CPU (4x2.3 GHz Mongoose \& 4x1.6 GHz Cortex-A53) integrated with an ARM Mali-T880 MP12 GPU (12x650 Mhz) running Android OS, v6.0 (Marshmallow). The libccv library was compiled with the flag NEON activated; the OpenCV-NEON-CPU  was also compiled with NEON activated. The  execution used  two threads in the CPU execution, and the OpenCV-OpenCL was compiled with support of OpenCL kernels.
+
+\begin{table}[]
+	\centering
+	\caption{Absolute time of OpenCV and libccv executions.}
+	\label{table:time}
+	\begin{tabular}{|l||l||l||l|}
+		\hline
+		\textbf{Environment} & \textbf{Blur (seconds)} & \textbf{Canny (s)} & \textbf{Sobel (s)} \\ \hline
+		\textbf{libccv}          & 1.639797                & 0.722346           & 0.225597           \\ \hline
+		\textbf{OpenCV-NEON-CPU} & 0.031524                & 0.406320           & 0.055624           \\ \hline
+		\textbf{OpenCV-OpenCL}   & 0.165318                & error              & 0.465160           \\ \hline
+	\end{tabular}
+\end{table}
+
+Since we tested both OpenCV and libccv with NEON-CPU  and the same programs (filters) it was expected that the performance would be similar for both libraries. However, due to its parallelized and optimized code, OpenCV revealed much better  speed-ups than libccv  (e.g. in the case of the Blur filter, it produced a 51x speed-up). As shown in Table \ref{table:time},  OpenCV-NEON-CPU also outperformed  libccv and OpenCV-OpenCL. In the case of OpenCV-OpenCL, this happened because the OpenCV OpenCL kernels were not designed  to run on Samsung mobile GPUs, but only on the  Intel-Iris and AMD-Kaveri architectures.   \\ \\
+
+\section{Our Proposal}
+\label{sec:proposal}
+
+\begin{python}[caption=A block of code from Sobel Filter, label=code:ex]
+	#pragma omp target device(GPU_DEVICE)
+	#pragma omp target map(to:a_ptr[0:(rows-1)*aSize]) \                             map(from:b_ptr[0:(rows-1)*bSize])
+	#pragma omp parallel for collapse(2)
+	for (i = 1; i < rows - 1; i++) {
+		for (j = 0; j < cols; j++) {
+			for (k = 0; k < ch; k++) {
+				((int * )b_ptr)[(i - 1) * bSize +  j * ch + k] = \
+				(int)(a_ptr[(i + 1) * step +  j * ch + k] + \ 
+				2 * a_ptr[(i - 1) * step +  j * ch + k] + \
+				a_ptr[(i - 2) * aSize + j * ch + k]);
+			}
+		}
+	}
+\end{python}
+
+As observed during this study, both libraries were not fully designed to execute in  a Samsung mobile environment. This creates  a series of opportunities o achieve better performance on OpenCV or libccv, by using the AClang to compile and optimize OpenMP 4.X code to Samsung GPUs. 
+
+As a example of an AClang potential, we  extracted an example of a code block  from the Sobel filter of libccv as shown the Code \ref{code:ex}, that reveal how a programmer can extract parallelism through OpenMP 4.X in AClang. By just  adding some annotations to the code (\textit{pragmas}), AClang is capable of generating optimized OpenCL code for execution on Samsung devices. As a future extension  of this work plan, we  are considering to measure AClang execution on OpenCV and libccv in order to check the improvements that can be achieve by the execution of  optimized GPU kernels.
+
+\section{Schedule}
+\label{sec:schedule}
+
+For this work plan we will focus on characterizing and make a comparative study of OpenCV and libccv. In order to implement this, we have to perform the following two major tasks: (a) make a thorough study of the OpenCV and libccv libraries; (b) do a performance analysis of the major routines used in these bechmarks for Samsung multicore and GPU architectures. The schedule of the activities required to perform these tasks is shown in Table~\ref{tab:cronograma}.
+
+\begin{enumerate}
+\item Study of the libccv library.
+\item Study of the OpenCV library.
+\item Design of a  benchmark that uses libccv functions. 
+\item Design of a benchmark that uses OpenCV functions.
+\item Performance analysis of OpenCV and libccv benchmarks in multicore and GPU
+\item Comparative evaluation of OpenCCV and libccv performance 
+\item Preparation of the benchmark release and final report
+\end{enumerate}
+
+\begin{table}[ht]
+\vspace{0.5cm}
+\centering
+\caption{Schedule for the next months}
+\label{tab:cronograma}
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+ & \multicolumn{6}{|c|}{Months 2017/2018} \\ 
+\cline{2-7} 
+Activity & Out. & Nov. & Dez. & Jan. & Feb. & Mar. \\ \hline
+1 & \checkmark & \checkmark &  &  &  &      \\ \hline
+2 &  &  \checkmark  & \checkmark &    &   &  \\ \hline
+3 &  & \checkmark  & \checkmark &  \checkmark    &  & \\ \hline
+4 &  &   & \checkmark &  \checkmark   &  \checkmark  &   \\ \hline
+5 &  & \checkmark  &   \checkmark    &  \checkmark   &   \checkmark      &    \\ \hline
+6 &  &   & \checkmark &  \checkmark   &  \checkmark  & \\ \hline
+7 &  &   &  &     &   \checkmark  & \checkmark \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{thebibliography}{10}
+	\bibitem{opencv}
+	Open Source Computer Vision Library. Accessed: September 20, 2017. [Online]. 
+	\textcolor{blue}{\url{http://opencv.org/}}.
+	
+	\bibitem{ccv}
+	A Modern Computer Vision Library. Accessed: September 20, 2017. [Online]. 
+	\textcolor{blue}{\url{http://libccv.org/}}.
+	
+	
+	\bibitem{aclang}
+	ACLang compiler. Accessed: September 20, 2017. [Online].
+	\textcolor{blue}{\url{https://omp2ocl.github.io/aclang/}}.
+	
+	
+\end{thebibliography}
+
+\FloatBarrier
+\end{document}\grid
